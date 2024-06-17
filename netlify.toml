@@ -4,3 +4,9 @@
   status = 200
   force = true
 headers = {Authorization = "${BASIC_AUTH}"}
+
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
