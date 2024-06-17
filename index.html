@@ -5,46 +5,50 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mambu Database Backup</title>
-    <style>
-      .container {
-        max-width: 1336px;
-        margin-inline: auto;
-      }
-      .flex {
-        display: flex;
-      }
-      .flex-col {
-        flex-direction: column;
-      }
-      .input {
-        padding: 8px 12px;
-        font-family: inherit;
-        border-radius: 8px;
-        border: 1px solid gray;
-      }
-      .gap-1 {
-        gap: 8px;
-      }
-      .gap-2 {
-        gap: 1rem;
-      }
-    </style>
   </head>
   <body>
     <main class="container">
       <h1>Create Mambu DB Backkup</h1>
       <div class="form_group flex flex-col">
-        <form class="flex flex-col gap-2">
-          <label for="username">Username:</label>
-          <input type="text" id="username" class="input" />
-          <label for="password">Password:</label>
-          <input type="password" name="password" id="password" class="input" />
-          <label for="date_today">Select Date for database backup:</label>
-          <input type="date" name="date_today" id="date_today" class="input" />
+        <form class="flex flex-col gap-2 py-2">
+          <div class="input_group flex-col">
+            <label for="username">Admin User Name:</label>
+            <input type="text" id="username" class="input" />
+          </div>
+          <div class="input_group flex-col">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="input"
+            />
+          </div>
+          <div class="input_group flex-col">
+            <label for="date_today">Select Date for database backup:</label>
+            <input
+              type="date"
+              name="date_today"
+              id="date_today"
+              class="input"
+            />
+          </div>
 
           <button type="button" id="btn_submit">Create DB Backup</button>
         </form>
       </div>
+
+      <h2>Download DB Backup</h2>
+      <form class="flex flex-col gap-2 py-2">
+        <label for="backupversion">Database Backup Version:</label>
+        <input
+          type="text"
+          name="backupversion"
+          id="backupversion"
+          class="input"
+        />
+        <button type="button" id="btn_download">Download Backup</button>
+      </form>
     </main>
     <script type="module" src="/main.js"></script>
   </body>

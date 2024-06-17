@@ -1,5 +1,5 @@
 import './style.css'
-import { mambudb_backup, getUsers } from './mambudb_backup.js'
+import { mambudb_backup, getUsers, getDBBackup } from './mambudb_backup.js'
 
 const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
 
@@ -49,4 +49,24 @@ function getCurrentDate() {
     console.warn('createBackupFromDate is not defined or does not have value. Please select a date on the input date');
   }
 }
+
+const downloadDBBackup = document.getElementById('btn_download')
+
+downloadDBBackup.addEventListener('click', e => {
+  e.preventDefault;
+
+  let backup_fileName = document.getElementById('backupversion');
+
+  let backup_version = backup_fileName.value;
+  console.log(backup_version);
+
+
+
+  getDBBackup(backup_version).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
+
+  setTimeout(() => {
+    backup_fileName.value = ''
+  }, 100)
+})
+
 
