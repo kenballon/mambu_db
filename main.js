@@ -16,7 +16,7 @@ todaysDate.addEventListener('change', e => {
 })
 
 const formSubmit = document.querySelector('#btn_submit')
-const webhookSiteURL = 'https://webhook.site/ff7af1bd-5dfa-42ec-a0a1-3883fd8d4231';
+const webhookSiteURL = 'https://webhook.site/53f68f28-70d0-42f7-b915-db22d1510c6a';
 
 
 
@@ -31,12 +31,12 @@ formSubmit.addEventListener('click', e => {
   const triggerDBObjects = {
     'webhookUrl': webhookSiteURL,
     'fromDate': getCurrentDate(),
-    'tablesArr': ['user'],// tables used by the company such client, users and more
+    'tablesArr': ['client'],// tables used by the company such client, users and more
     'username': username,
     'password': password,
   }
   console.log(triggerDBObjects);
-  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.fromDate, triggerDBObjects.username, triggerDBObjects.password);
+  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password);
 })
 
 function getCurrentDate() {
