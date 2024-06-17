@@ -14,7 +14,10 @@ todaysDate.addEventListener('change', e => {
     console.error('No date was selected')
   }
   // Convert the value to ISO string
-  createBackupFromDate = new Date(value).toISOString().replace(/\.\d{3}Z$/, 'Z');
+  // createBackupFromDate = new Date(value).toISOString().replace(/\.\d{3}Z$/, 'Z');
+  let date = new Date(value);
+
+  createBackupFromDate = date.toLocaleString('sv-SE', { timeZone: 'Asia/Manila' }).replace(' ', 'T') + ':00';
 })
 
 const formSubmit = document.querySelector('#btn_submit')
@@ -35,9 +38,9 @@ formSubmit.addEventListener('click', e => {
     'password': password,
   }
   console.log(triggerDBObjects);
-  getUsers(username, password).then(() => console.log('User data fetched...')).catch(err => { console.error('error', err) });
+  // getUsers(username, password).then(() => console.log('User data fetched...')).catch(err => { console.error('error', err) });
 
-  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.fromDate, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
+  // mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.fromDate, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
 function getCurrentDate() {
