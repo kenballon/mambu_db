@@ -51,9 +51,11 @@ function getCurrentDate() {
   }
 }
 
+
+
 async function getUsers(un, pw) {
-  const proxyURL = 'https://mambu-mentorsphilippines.netlify.app/';
-  const targetUrl = 'https://mentorsphilippines.sandbox.mambu.com/api/users';
+  const proxyURL = 'https://mambu-mentorsphilippines.netlify.app/api/';
+  // The targetUrl is not needed anymore because we're using the proxy path
   const authenticatedUsers = btoa(`${un}:${pw}`);
 
   const headers = {
@@ -62,7 +64,7 @@ async function getUsers(un, pw) {
   };
 
   try {
-    const response = await fetch(proxyURL + targetUrl, {
+    const response = await fetch(proxyURL, { // Use only the proxyURL which includes the /api/ path
       method: 'GET',
       headers: headers
     });
@@ -73,4 +75,5 @@ async function getUsers(un, pw) {
     console.error('Error', error);
   }
 }
+
 
