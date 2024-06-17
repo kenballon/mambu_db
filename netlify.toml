@@ -3,7 +3,7 @@
   to = "https://mentorsphilippines.sandbox.mambu.com/api/:splat"
   status = 200
   force = true
-headers = {Authorization = "${BASIC_AUTH}"}
+  headers = {Authorization = "${BASIC_AUTH}"}
 
 
 [[headers]]

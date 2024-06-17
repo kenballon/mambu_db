@@ -36,10 +36,6 @@ formSubmit.addEventListener('click', e => {
     'password': password,
   }
   console.log(triggerDBObjects);
-  // mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password)
-  //   .then(() => console.log('Backup initiated successfully'))
-  //   .catch(error => console.error('Backup initiation failed ', error));
-
   getUsers(username, password);
 })
 
@@ -51,15 +47,11 @@ function getCurrentDate() {
   }
 }
 
-
-
 async function getUsers(un, pw) {
-  const proxyURL = 'https://mambu-mentorsphilippines.netlify.app/api/';
-  // The targetUrl is not needed anymore because we're using the proxy path
+  const proxyURL = 'https://mambu-mentorsphilippines.netlify.app/api/users';
   const authenticatedUsers = btoa(`${un}:${pw}`);
 
   const headers = {
-    'Content-Type': 'application/json',
     'Authorization': `Basic ${authenticatedUsers}`
   };
 
