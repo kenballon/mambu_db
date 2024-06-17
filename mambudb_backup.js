@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
+const baseUrl = 'https://mambu-mentorsphilippines.netlify.app/api';
 
 export async function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
@@ -36,7 +36,7 @@ export async function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
 export async function getUsers(un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
     try {
-        const response = await fetch('https://mambu-mentorsphilippines.netlify.app/api/users', {
+        const response = await fetch(`${baseUrl}/users`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
