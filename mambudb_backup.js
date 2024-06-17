@@ -36,7 +36,7 @@ export async function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
 export async function getUsers(un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
     try {
-        const response = await fetch('https://mentorsphilippines.sandbox.mambu.com/api/users', {
+        const response = await fetch('https://mambu-mentorsphilippines.netlify.app/api/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
