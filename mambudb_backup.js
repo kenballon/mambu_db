@@ -1,9 +1,8 @@
-import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
+const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
 
-export function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
-
+export async function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
 
     const headers = {
@@ -13,28 +12,23 @@ export function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
         'Authorization': `Basic ${authUsers}`
     };
 
-    const data = {
+    const requestBody = {
         callback: callbackUrl,
         createBackupFromDate: fromDate,
         tables: tables
     };
 
-    axios.post('https://mentorsphilippines.sandbox.mambu.com/api/database/backup', data, { headers: headers })
-        .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            return JSON.stringify(response.data);
-        })
-        .catch(function (error) {
-            if (error.response) {
-
-                console.error("Error data:", error.response.data);
-                console.error("Error status:", error.response.status);
-                console.error("Error headers:", error.response.headers);
-            } else if (error.request) {
-                console.error("Error request:", error.request);
-            } else {
-                console.error("Error message:", error.message);
-            }
+    try {
+        const response = await fetch(`${baseUrl}/database/backup`, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(requestBody)
         });
 
+        const responseData = await response.json();
+        console.log(responseData);
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
