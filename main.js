@@ -13,7 +13,7 @@ todaysDate.addEventListener('change', e => {
   if (!value) {
     console.error('No date was selected')
   }
-  // Convert the value to ISO string
+
   // createBackupFromDate = new Date(value).toISOString().replace(/\.\d{3}Z$/, 'Z');
   let date = new Date(value);
 
@@ -32,7 +32,6 @@ formSubmit.addEventListener('click', e => {
 
   const triggerDBObjects = {
     'webhookUrl': webhookSiteURL,
-    'fromDate': getCurrentDate(),
     'tablesArr': ['client'],// tables used by the company such client, users and more
     'username': username,
     'password': password,

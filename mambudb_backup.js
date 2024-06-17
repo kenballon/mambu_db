@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const baseUrl = 'https://mambu-mentorsphilippines.netlify.app/api';
 
-export async function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
+export async function mambudb_backup(callbackUrl, tables, un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
 
     const headers = {
@@ -14,7 +14,6 @@ export async function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
 
     const requestBody = {
         callback: callbackUrl,
-        createBackupFromDate: fromDate,
         tables: tables
     };
 
