@@ -1,5 +1,5 @@
 import './style.css'
-import { mambudb_backup } from './mambudb_backup.js'
+import { mambudb_backup, getUsers } from './mambudb_backup.js'
 
 const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
 
@@ -24,7 +24,6 @@ const webhookSiteURL = 'https://webhook.site/53f68f28-70d0-42f7-b915-db22d1510c6
 formSubmit.addEventListener('click', e => {
   e.preventDefault;
 
-  // Get the username and password values
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
 
@@ -36,7 +35,7 @@ formSubmit.addEventListener('click', e => {
     'password': password,
   }
   console.log(triggerDBObjects);
-  getUsers(username, password);
+  getUsers(username, password).then(() => console.log('User data fetched...')).catch(err => { console.error('error', err) });
 })
 
 function getCurrentDate() {
@@ -46,26 +45,4 @@ function getCurrentDate() {
     console.warn('createBackupFromDate is not defined or does not have value. Please select a date on the input date');
   }
 }
-
-async function getUsers(un, pw) {
-  const proxyURL = 'https://mambu-mentorsphilippines.netlify.app/api/users';
-  const authenticatedUsers = btoa(`${un}:${pw}`);
-
-  const headers = {
-    'Authorization': `Basic ${authenticatedUsers}`
-  };
-
-  try {
-    const response = await fetch(proxyURL, { // Use only the proxyURL which includes the /api/ path
-      method: 'GET',
-      headers: headers
-    });
-
-    const responseData = await response.json();
-    console.log(responseData);
-  } catch (error) {
-    console.error('Error', error);
-  }
-}
-
 

@@ -32,3 +32,22 @@ export async function mambudb_backup(callbackUrl, fromDate, tables, un, pw) {
         console.error('Error:', error);
     }
 }
+
+export async function getUsers(un, pw) {
+    const authUsers = btoa(`${un}:${pw}`);
+    try {
+        const response = await fetch('https://mentorsphilippines.sandbox.mambu.com/api/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${authUsers}`
+            }
+        })
+
+        const responseData = await response.json();
+        console.log(responseData);
+    } catch (error) {
+        console.error('Error', error)
+    }
+}
+
