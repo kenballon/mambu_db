@@ -113,10 +113,29 @@ button:focus-visible {
   gap: 1rem;
 }
 
+.mx-1 {
+  margin-inline: 1rem;
+}
+
+.my-1 {
+  margin-block: 1rem;
+}
+
 .input_group {
   display: flex;
 }
 
 .py-2 {
   padding-block: 2rem;
+}
+
+.ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pill-table {
+  padding: 4px 8px;
+  border: 1px solid gray;
+  border-radius: 24px;
 }

@@ -25,6 +25,15 @@
             />
           </div>
           <div class="input_group flex-col">
+            <label for="tablesArr">SQL Tables to perform backup to:</label>
+            <input type="text" id="tablesArr" name="tablesArr" class="input" />
+            <small
+              >Enter "user, client and etc." Pressing comma (,) or hitting enter
+              key.</small
+            >
+            <ul id="tagList" class="ul flex gap-1 my-1"></ul>
+          </div>
+          <div class="input_group flex-col">
             <label for="date_today">Select Date for database backup:</label>
             <input
               type="date"

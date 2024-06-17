@@ -5,6 +5,7 @@ const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
 
 const todaysDate = document.querySelector('#date_today');
 let createBackupFromDate;
+let sqlTables = [];
 
 todaysDate.addEventListener('change', e => {
 
@@ -32,12 +33,14 @@ formSubmit.addEventListener('click', e => {
 
   const triggerDBObjects = {
     'webhookUrl': webhookSiteURL,
-    'tablesArr': ['client'],// tables used by the company such client, users and more
+    'tablesArr': sqlTables,// tables used by the company such client, users and more
     'username': username,
     'password': password,
   }
 
-  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
+  console.log(triggerDBObjects);
+
+  // mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
 function getCurrentDate() {
@@ -68,5 +71,25 @@ downloadDBBackup.addEventListener('click', e => {
     backup_fileName.value = ''
   }, 100)
 })
+
+const sqlTableInput = document.getElementById("tablesArr");
+const tagList = document.getElementById("tagList");
+
+sqlTableInput.addEventListener("keydown", (event) => {
+  // Check for Enter (keyCode 13) or comma (keyCode 188)
+  if (event.keyCode === 13 || event.keyCode === 188) {
+    const newTag = sqlTableInput.value.trim(); // Trim leading/trailing spaces
+    if (newTag) {
+      sqlTables.push(newTag); // Add tag to the array
+      tagList.innerHTML += `<li class="pill-table">${newTag}</li>`; // Add tag to the list
+      sqlTableInput.value = ""; // Clear the input field for next tag
+      // Remove comma if comma key was pressed
+      if (event.keyCode === 188) {
+        event.preventDefault(); // Prevent default comma insertion
+      }
+
+    }
+  }
+});
 
 
