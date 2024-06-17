@@ -50,10 +50,11 @@ export async function getUsers(un, pw) {
     }
 }
 
-export async function getDBBackup(databaseBackupVersion) {
-
+export async function getDBBackup(databaseBackupVersion, un, pw) {
+    const authUsers = btoa(`${un}:${pw}`);
     const headers = {
-        'Accept': 'application/vnd.mambu.v2+zip'
+        'Accept': 'application/vnd.mambu.v2+zip',
+        'Authorization': `Basic ${authUsers}`
     };
 
     try {

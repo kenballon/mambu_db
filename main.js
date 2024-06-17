@@ -55,14 +55,16 @@ const downloadDBBackup = document.getElementById('btn_download')
 downloadDBBackup.addEventListener('click', e => {
   e.preventDefault;
 
+  let username = document.getElementById('username').value;
+  let password = document.getElementById('password').value;
+
   let backup_fileName = document.getElementById('backupversion');
-
   let backup_version = backup_fileName.value;
-  console.log(backup_version);
+
+  console.log(username, password);
 
 
-
-  getDBBackup(backup_version).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
+  getDBBackup(backup_version, username, password).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
 
   setTimeout(() => {
     backup_fileName.value = ''
