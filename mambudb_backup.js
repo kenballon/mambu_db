@@ -52,6 +52,7 @@ export async function getUsers(un, pw) {
 
 export async function getDBBackup(databaseBackupVersion, un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
+
     const headers = {
         'Accept': 'application/vnd.mambu.v2+zip',
         'Authorization': `Basic ${authUsers}`
@@ -66,10 +67,7 @@ export async function getDBBackup(databaseBackupVersion, un, pw) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        const data = await response.blob(); // Use blob if you're expecting a binary file
-
-        // The rest of your code to handle the download goes here
+        const data = await response.blob();
         console.log(data);
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);

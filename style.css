@@ -88,6 +88,10 @@ button:focus-visible {
 .container {
   max-width: 1336px;
   margin-inline: auto;
+
+  @media (max-width:992px) {
+    padding-inline: 24px;
+  }
 }
 
 .flex {
