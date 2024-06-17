@@ -39,7 +39,7 @@ formSubmit.addEventListener('click', e => {
   console.log(triggerDBObjects);
   getUsers(username, password).then(() => console.log('User data fetched...')).catch(err => { console.error('error', err) });
 
-  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.fromDate, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
+  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
 function getCurrentDate() {
