@@ -52,7 +52,7 @@ export async function getUsers(un, pw) {
     }
 }
 
-export async function getDBBackup(un, pw) {
+export async function getDBBackup(un, pw, download_date = 'today') {
     const authUsers = btoa(`${un}:${pw}`);
 
     const headers = {
@@ -76,7 +76,7 @@ export async function getDBBackup(un, pw) {
         // Create a link element
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'database_backup.zip'; // Specify the desired file name
+        a.download = `database_backup_${download_date}.zip`;
         document.body.appendChild(a);
         a.click();
 

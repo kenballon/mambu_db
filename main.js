@@ -6,20 +6,24 @@ const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
 const todaysDate = document.querySelector('#date_today');
 let createBackupFromDate;
 let sqlTables = [];
+let backupDateFileName;
 
-// todaysDate.addEventListener('change', e => {
+todaysDate.addEventListener('change', e => {
 
-//   const value = e.target.value;
+  const value = e.target.value;
 
-//   if (!value) {
-//     console.error('No date was selected')
-//   }
+  if (!value) {
+    console.error('No date was selected')
+  }
 
-//   // createBackupFromDate = new Date(value).toISOString().replace(/\.\d{3}Z$/, 'Z');
-//   let date = new Date(value);
+  let date = new Date(value);
+  createBackupFromDate = date.toLocaleString('sv-SE', { timeZone: 'Asia/Manila' }).replace(' ', 'T') + ':00';
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = date.toLocaleDateString('en-US', options).replace(/ /g, '-').replace(/,/g, '');
+  backupDateFileName = formattedDate;
 
-//   createBackupFromDate = date.toLocaleString('sv-SE', { timeZone: 'Asia/Manila' }).replace(' ', 'T') + ':00';
-// })
+  console.log(backupDateFileName);
+})
 
 const formSubmit = document.querySelector('#btn_submit')
 
@@ -59,9 +63,7 @@ downloadDBBackup.addEventListener('click', e => {
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
 
-  console.log(username, password);
-
-  getDBBackup(username, password).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
+  getDBBackup(username, password, backupDateFileName).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
 
 })
 
