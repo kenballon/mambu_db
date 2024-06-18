@@ -53,7 +53,6 @@ export async function getUsers(un, pw) {
 }
 
 export async function getDBBackup(un, pw) {
-
     const authUsers = btoa(`${un}:${pw}`);
 
     const headers = {
@@ -62,7 +61,7 @@ export async function getDBBackup(un, pw) {
     };
 
     try {
-        const response = await fetch(`${baseUrl}/database/backup/LATEST`, {
+        const response = await fetch(`${baseUrl}/api/database/backup/LATEST`, {
             method: 'GET',
             headers: headers
         });
@@ -70,11 +69,26 @@ export async function getDBBackup(un, pw) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.blob();
-        console.log(data);
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        // Create a link element
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'database_backup.zip'; // Specify the desired file name
+        document.body.appendChild(a);
+        a.click();
+
+        // Clean up and revoke the object URL
+        URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
+
+
 
 
