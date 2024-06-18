@@ -8,7 +8,7 @@
   </head>
   <body>
     <main class="container">
-      <h1>Create Mambu DB Backkup</h1>
+      <h1 class="headline">Create Mambu DB Backup</h1>
       <div class="form_group flex flex-col">
         <form class="flex flex-col gap-2 py-2">
           <div class="input_group flex-col">
@@ -48,14 +48,19 @@
               class="input"
             />
           </div>
-          <div class="input_group gap-2">
-            <button type="button" id="btn_submit">Create DB Backup</button>
-            <button type="button" id="btn_download">Download Backup</button>
+          <div class="input_group">
+            <div class="ml-auto flex gap-2">
+              <button type="button" id="btn_download">
+                Download DB Backup
+              </button>
+
+              <button type="button" id="btn_submit" class="btn-primary">
+                Backup DB
+              </button>
+            </div>
           </div>
         </form>
       </div>
-
-      <h2>Download DB Backup</h2>
     </main>
     <script type="module" src="/main.js"></script>
   </body>
