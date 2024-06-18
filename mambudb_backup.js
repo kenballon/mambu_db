@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const baseUrl = 'https://mambu-mentorsphilippines.netlify.app/api';
 
-export async function mambudb_backup(callbackUrl, tables, un, pw) {
+export async function mambudb_backup(callbackUrl, tables = [], un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
 
     const headers = {
@@ -14,7 +14,7 @@ export async function mambudb_backup(callbackUrl, tables, un, pw) {
 
     const requestBody = {
         callback: callbackUrl,
-        tables: tables
+        ...(tables.length > 0 && { tables: tables })
     };
 
     try {
@@ -24,8 +24,10 @@ export async function mambudb_backup(callbackUrl, tables, un, pw) {
             body: JSON.stringify(requestBody)
         });
 
-        const responseData = await response.json();
-        console.log(responseData);
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log(responseData);
+        }
 
     } catch (error) {
         console.error('Error:', error);
@@ -50,7 +52,8 @@ export async function getUsers(un, pw) {
     }
 }
 
-export async function getDBBackup(databaseBackupVersion, un, pw) {
+export async function getDBBackup(un, pw) {
+
     const authUsers = btoa(`${un}:${pw}`);
 
     const headers = {
@@ -59,7 +62,7 @@ export async function getDBBackup(databaseBackupVersion, un, pw) {
     };
 
     try {
-        const response = await fetch(`${baseUrl}/database/backup/${databaseBackupVersion}`, {
+        const response = await fetch(`${baseUrl}/database/backup/LATEST`, {
             method: 'GET',
             headers: headers
         });

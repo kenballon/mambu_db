@@ -7,27 +7,27 @@ const todaysDate = document.querySelector('#date_today');
 let createBackupFromDate;
 let sqlTables = [];
 
-todaysDate.addEventListener('change', e => {
+// todaysDate.addEventListener('change', e => {
 
-  const value = e.target.value;
+//   const value = e.target.value;
 
-  if (!value) {
-    console.error('No date was selected')
-  }
+//   if (!value) {
+//     console.error('No date was selected')
+//   }
 
-  // createBackupFromDate = new Date(value).toISOString().replace(/\.\d{3}Z$/, 'Z');
-  let date = new Date(value);
+//   // createBackupFromDate = new Date(value).toISOString().replace(/\.\d{3}Z$/, 'Z');
+//   let date = new Date(value);
 
-  createBackupFromDate = date.toLocaleString('sv-SE', { timeZone: 'Asia/Manila' }).replace(' ', 'T') + ':00';
-})
+//   createBackupFromDate = date.toLocaleString('sv-SE', { timeZone: 'Asia/Manila' }).replace(' ', 'T') + ':00';
+// })
 
 const formSubmit = document.querySelector('#btn_submit')
-const webhookSiteURL = 'https://webhook.site/53f68f28-70d0-42f7-b915-db22d1510c6a';
 
 
 formSubmit.addEventListener('click', e => {
   e.preventDefault;
 
+  const webhookSiteURL = document.getElementById('webhook_url').value;
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
 
@@ -40,7 +40,7 @@ formSubmit.addEventListener('click', e => {
 
   console.log(triggerDBObjects);
 
-  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
+  // mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
 function getCurrentDate() {
@@ -59,17 +59,10 @@ downloadDBBackup.addEventListener('click', e => {
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
 
-  let backup_fileName = document.getElementById('backupversion');
-  let backup_version = backup_fileName.value;
-
   console.log(username, password);
 
+  getDBBackup(username, password).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
 
-  getDBBackup(backup_version, username, password).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
-
-  setTimeout(() => {
-    backup_fileName.value = ''
-  }, 100)
 })
 
 const sqlTableInput = document.getElementById("tablesArr");

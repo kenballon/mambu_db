@@ -13,7 +13,7 @@
         <form class="flex flex-col gap-2 py-2">
           <div class="input_group flex-col">
             <label for="username">Admin User Name:</label>
-            <input type="text" id="username" class="input" />
+            <input type="text" id="username" class="input" required />
           </div>
           <div class="input_group flex-col">
             <label for="password">Password:</label>
@@ -22,10 +22,12 @@
               name="password"
               id="password"
               class="input"
+              required
             />
           </div>
           <div class="input_group flex-col">
             <label for="tablesArr">SQL Tables to perform backup to:</label>
+            <small>This is optional.</small>
             <input type="text" id="tablesArr" name="tablesArr" class="input" />
             <small
               >Enter "user, client and etc." Pressing comma (,) or hitting enter
@@ -34,6 +36,10 @@
             <ul id="tagList" class="ul flex gap-1 my-1"></ul>
           </div>
           <div class="input_group flex-col">
+            <label for="webhook_url">Webhook URL:</label>
+            <input type="text" id="webhook_url" class="input" />
+          </div>
+          <!-- <div class="input_group flex-col">
             <label for="date_today">Select Date for database backup:</label>
             <input
               type="date"
@@ -41,23 +47,15 @@
               id="date_today"
               class="input"
             />
+          </div> -->
+          <div class="input_group gap-2">
+            <button type="button" id="btn_submit">Create DB Backup</button>
+            <button type="button" id="btn_download">Download Backup</button>
           </div>
-
-          <button type="button" id="btn_submit">Create DB Backup</button>
         </form>
       </div>
 
       <h2>Download DB Backup</h2>
-      <form class="flex flex-col gap-2 py-2">
-        <label for="backupversion">Database Backup Version:</label>
-        <input
-          type="text"
-          name="backupversion"
-          id="backupversion"
-          class="input"
-        />
-        <button type="button" id="btn_download">Download Backup</button>
-      </form>
     </main>
     <script type="module" src="/main.js"></script>
   </body>
