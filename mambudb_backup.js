@@ -61,7 +61,7 @@ export async function getDBBackup(un, pw) {
     };
 
     try {
-        const response = await fetch(`${baseUrl}/api/database/backup/LATEST`, {
+        const response = await fetch(`${baseUrl}/database/backup/LATEST`, {
             method: 'GET',
             headers: headers
         });
