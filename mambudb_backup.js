@@ -52,7 +52,7 @@ export async function getUsers(un, pw) {
     }
 }
 
-export async function getDBBackup(un, pw, download_date = 'today') {
+export async function getDatabseBackup(un, pw, download_date = 'today') {
     const authUsers = btoa(`${un}:${pw}`);
 
     const headers = {

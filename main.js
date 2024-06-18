@@ -1,5 +1,5 @@
 import './style.css'
-import { mambudb_backup, getUsers, getDBBackup } from './mambudb_backup.js'
+import { mambudb_backup, getDatabseBackup } from './mambudb_backup.js'
 
 const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
 
@@ -17,23 +17,37 @@ todaysDate.addEventListener('change', e => {
   }
 
   let date = new Date(value);
-  createBackupFromDate = date.toLocaleString('sv-SE', { timeZone: 'Asia/Manila' }).replace(' ', 'T') + ':00';
+  // createBackupFromDate = date.toLocaleString('sv-SE', { timeZone: 'Asia/Manila' }).replace(' ', 'T') + ':00';
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = date.toLocaleDateString('en-US', options).replace(/ /g, '-').replace(/,/g, '');
   backupDateFileName = formattedDate;
 
-  console.log(backupDateFileName);
 })
 
-const formSubmit = document.querySelector('#btn_submit')
+const createDbBackup = document.querySelector('#btn_createDbBackup')
 
-
-formSubmit.addEventListener('click', e => {
-  e.preventDefault;
+createDbBackup.addEventListener('click', e => {
+  e.preventDefault();
 
   const webhookSiteURL = document.getElementById('webhook_url').value;
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
+
+  // Validation
+  if (!webhookSiteURL || !username || !password) {
+    console.error('Please fill in all the fields');
+    return;
+  }
+
+  if (!webhookSiteURL.match(/^https?:\/\/.*/)) {
+    console.error('Invalid webhook URL');
+    return;
+  }
+
+  if (username.length < 3 || password.length < 3) {
+    console.error('Username and password must be at least 3 characters long');
+    return;
+  }
 
   const triggerDBObjects = {
     'webhookUrl': webhookSiteURL,
@@ -47,18 +61,10 @@ formSubmit.addEventListener('click', e => {
   mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
-function getCurrentDate() {
-  if (createBackupFromDate !== undefined) {
-    return createBackupFromDate;
-  } else {
-    console.warn('createBackupFromDate is not defined or does not have value. Please select a date on the input date');
-  }
-}
-
 const downloadDBBackup = document.getElementById('btn_download')
 
 downloadDBBackup.addEventListener('click', e => {
-  e.preventDefault;
+  e.preventDefault();
 
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
