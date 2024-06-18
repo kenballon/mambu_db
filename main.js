@@ -69,7 +69,7 @@ downloadDBBackup.addEventListener('click', e => {
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
 
-  getDBBackup(username, password, backupDateFileName).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
+  getDatabseBackup(username, password, backupDateFileName).then(() => console.log('Trying to download DB Backup...')).catch(err => console.error('Error', err));
 
 })
 
