@@ -57,9 +57,9 @@ createDbBackup.addEventListener('click', e => {
   }
 
   console.log(triggerDBObjects);
-  getUsers(triggerDBObjects.username, triggerDBObjects.password)
-    .then(() => console.log('got users')).catch(err => console.error('Error: ', err));
-  // mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
+  // getUsers(triggerDBObjects.username, triggerDBObjects.password)
+  // .then(() => console.log('got users')).catch(err => console.error('Error: ', err));
+  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
 const downloadDBBackup = document.getElementById('btn_download')
