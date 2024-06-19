@@ -4,6 +4,7 @@ const baseUrl = 'https://mambu-mentorsphilippines.netlify.app/api';
 
 export async function mambudb_backup(callbackUrl, tables = [], un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
+    console.log(authUsers);
 
     const headers = {
         'Content-Type': 'application/json',
