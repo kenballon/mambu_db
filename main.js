@@ -1,5 +1,5 @@
 import './style.css'
-import { mambudb_backup, getDatabseBackup } from './mambudb_backup.js'
+import { mambudb_backup, getDatabseBackup, getUsers } from './mambudb_backup.js'
 
 const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
 
@@ -57,8 +57,9 @@ createDbBackup.addEventListener('click', e => {
   }
 
   console.log(triggerDBObjects);
-
-  mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
+  getUsers(triggerDBObjects.username, triggerDBObjects.password)
+    .then(() => console.log('got users')).catch(err => console.error('Error: ', err));
+  // mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
 const downloadDBBackup = document.getElementById('btn_download')
