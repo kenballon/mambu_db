@@ -4,7 +4,6 @@ const baseUrl = 'https://mambu-mentorsphilippines.netlify.app/api';
 
 export async function mambudb_backup(callbackUrl, tables = [], un, pw) {
     const authUsers = btoa(`${un}:${pw}`);
-    console.log(authUsers);
 
     const headers = {
         'Content-Type': 'application/json',
@@ -27,29 +26,11 @@ export async function mambudb_backup(callbackUrl, tables = [], un, pw) {
 
         if (response.ok) {
             const responseData = await response.json();
-            console.log(responseData);
+            return responseData;
         }
 
     } catch (error) {
         console.error('Error:', error);
-    }
-}
-
-export async function getUsers(un, pw) {
-    const authUsers = btoa(`${un}:${pw}`);
-    try {
-        const response = await fetch(`${baseUrl}/users`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Basic ${authUsers}`
-            }
-        })
-
-        const responseData = await response.json();
-        console.log(responseData);
-    } catch (error) {
-        console.error('Error', error)
     }
 }
 
@@ -87,6 +68,25 @@ export async function getDatabseBackup(un, pw, download_date = 'today') {
 
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
+
+export async function getUsers(un, pw) {
+    const authUsers = btoa(`${un}:${pw}`);
+    try {
+        const response = await fetch(`${baseUrl}/users`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${authUsers}`
+            }
+        })
+
+        const responseData = await response.json();
+        console.log(responseData);
+    } catch (error) {
+        console.error('Error', error)
     }
 }
 

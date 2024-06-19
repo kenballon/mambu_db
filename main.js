@@ -1,8 +1,6 @@
 import './style.css'
 import { mambudb_backup, getDatabseBackup, getUsers } from './mambudb_backup.js'
 
-const baseUrl = 'https://mentorsphilippines.sandbox.mambu.com/api';
-
 const todaysDate = document.querySelector('#date_today');
 let createBackupFromDate;
 let sqlTables = [];
@@ -25,7 +23,6 @@ todaysDate.addEventListener('change', e => {
 })
 
 const createDbBackup = document.querySelector('#btn_createDbBackup')
-
 createDbBackup.addEventListener('click', e => {
   e.preventDefault();
 
@@ -33,25 +30,9 @@ createDbBackup.addEventListener('click', e => {
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
 
-  // Validation
-  // if (!webhookSiteURL || !username || !password) {
-  //   console.error('Please fill in all the fields');
-  //   return;
-  // }
-
-  // if (!webhookSiteURL.match(/^https?:\/\/.*/)) {
-  //   console.error('Invalid webhook URL');
-  //   return;
-  // }
-
-  // if (username.length < 3 || password.length < 3) {
-  //   console.error('Username and password must be at least 3 characters long');
-  //   return;
-  // }
-
   const triggerDBObjects = {
     'webhookUrl': webhookSiteURL,
-    'tablesArr': sqlTables,// tables used by the company such client, users and more
+    'tablesArr': sqlTables,
     'username': username,
     'password': password,
   }
@@ -59,8 +40,9 @@ createDbBackup.addEventListener('click', e => {
   mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
-const downloadDBBackup = document.getElementById('btn_download')
 
+
+const downloadDBBackup = document.getElementById('btn_download')
 downloadDBBackup.addEventListener('click', e => {
   e.preventDefault();
 
