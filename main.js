@@ -40,8 +40,6 @@ createDbBackup.addEventListener('click', e => {
   mambudb_backup(triggerDBObjects.webhookUrl, triggerDBObjects.tablesArr, triggerDBObjects.username, triggerDBObjects.password).then(() => console.log('Database backup triggered...')).catch(err => console.log('Error: ', err));
 })
 
-
-
 const downloadDBBackup = document.getElementById('btn_download')
 downloadDBBackup.addEventListener('click', e => {
   e.preventDefault();
