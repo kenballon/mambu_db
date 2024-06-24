@@ -26,6 +26,7 @@ export async function mambudb_backup(callbackUrl, tables = [], un, pw) {
 
         if (response.ok) {
             const responseData = await response.json();
+            console.log(responseData);
             return responseData;
         }
 
